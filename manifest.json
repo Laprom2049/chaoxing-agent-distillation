@@ -1,10 +1,10 @@
 {
  "name": "chaoxing-ai-ta-behavior-distillation",
  "version": "1.0.0",
- "generatedAt": "2026-11-23T06:52:36.891Z",
+ "generatedAt": "2026-11-23T06:52:56.098Z",
  "scope": "git 跟踪文件；不含 manifest.json 自身、out/ 与未公开的原始 dump",
  "totalFiles": 91,
- "totalBytes": 1668358,
+ "totalBytes": 1668991,
  "files": [
   {
    "path": ".gitattributes",
@@ -338,8 +338,8 @@
   },
   {
    "path": "reproduce/run_all.cjs",
-   "bytes": 1781,
-   "sha256": "6c85a5376679bae8ae354213c5336532b324b69617b5f9ae71754fda9ae96be0"
+   "bytes": 2414,
+   "sha256": "a673a571c77c173aa89420d466ff9374a3bc1617605a5125e03cbfba22860748"
   },
   {
    "path": "reproduce/runbooks/README.md",
