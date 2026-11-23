@@ -1,0 +1,123 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-11-15T11:40:00+08:00",
+  "important": "本文件只声明用户侧的可用能力。目标 Agent 页面上的技能按钮（学习答疑、大雅查重、超星翻译、拍照搜题等）是**目标产品的界面元素**，不是本 Agent 的工具，不得当作已具备。",
+  "provisioned": false,
+  "provisioned_note": "当前会话未获知用户侧实际工具清单。下列工具均标记 availability=undeclared，需由用户确认后再启用；未确认时一律走 fallback 规则。",
+  "tools": [
+    {
+      "name": "knowledge_search",
+      "description": "在用户自有资料库中检索片段，用于课程域答疑时提供依据",
+      "availability": "undeclared",
+      "side_effects": "none",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "query": { "type": "string", "description": "检索式" },
+          "top_k": { "type": "integer", "default": 5, "minimum": 1, "maximum": 20 },
+          "scope": { "type": "string", "description": "限定资料集，如 course:266030150" }
+        },
+        "required": ["query"]
+      },
+      "returns": {
+        "type": "object",
+        "properties": {
+          "hits": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "text": { "type": "string" },
+                "source": { "type": "string" },
+                "locator": { "type": "string" },
+                "score": { "type": "number" }
+              },
+              "required": ["text", "source"]
+            }
+          }
+        }
+      },
+      "fallback": "我无法检索你的资料库。以下为通用推理，未经资料核对；如需精确结论，建议自行核对：……"
+    },
+    {
+      "name": "calculate",
+      "description": "执行数值或符号计算，避免手算误差",
+      "availability": "undeclared",
+      "side_effects": "none",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "expression": { "type": "string" },
+          "precision": { "type": "integer", "default": 6 }
+        },
+        "required": ["expression"]
+      },
+      "returns": {
+        "type": "object",
+        "properties": {
+          "value": { "type": "string" },
+          "steps": { "type": "array", "items": { "type": "string" } }
+        }
+      },
+      "fallback": "我无法直接执行计算。以下手算过程请你核对每一步：……"
+    },
+    {
+      "name": "format_transform",
+      "description": "做结构化格式转换（Markdown/JSON/CSV/表格），并校验可解析性",
+      "availability": "undeclared",
+      "side_effects": "none",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "input": { "type": "string" },
+          "target": { "type": "string", "enum": ["json", "csv", "markdown_table", "yaml"] },
+          "strict": { "type": "boolean", "default": true, "description": "true 时输出必须能被对应解析器直接解析" }
+        },
+        "required": ["input", "target"]
+      },
+      "returns": {
+        "type": "object",
+        "properties": {
+          "output": { "type": "string" },
+          "parse_verified": { "type": "boolean" },
+          "error": { "type": "string" }
+        }
+      },
+      "fallback": "我无法运行解析器验证输出。以下转换结果请你用 JSON.parse / CSV 导入核对，特别检查引号与转义。"
+    },
+    {
+      "name": "read_local_file",
+      "description": "只读访问用户指定路径的文本文件",
+      "availability": "undeclared",
+      "side_effects": "read_only",
+      "constraints": ["不得写入", "不得修改原文件", "不得读取未指定路径"],
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "path": { "type": "string" },
+          "encoding": { "type": "string", "default": "utf-8" }
+        },
+        "required": ["path"]
+      },
+      "fallback": "我无法读取该路径。请把相关内容粘贴给我，或告知我可访问的方式。"
+    }
+  ],
+  "explicitly_not_provisioned": [
+    { "capability": "发送邮件/消息", "reason": "副作用操作，默认不提供" },
+    { "capability": "下单/付款/转账", "reason": "副作用操作，默认不提供" },
+    { "capability": "删除文件或数据", "reason": "不可逆操作，默认不提供" },
+    { "capability": "修改数据库/账号/权限", "reason": "副作用操作，默认不提供" },
+    { "capability": "外部联网抓取", "reason": "未声明；如需请先确认来源合规" }
+  ],
+  "global_rules": [
+    "未 provisioned 的工具一律不得假装调用成功。",
+    "不得把工具返回值编造给用户。",
+    "任何写操作、外发操作在执行前必须取得用户逐次确认。",
+    "工具返回空结果时，如实说明为空，不得用常识补全成'查到了'。",
+    "同一工具连续失败 2 次后停止重试，改为 fallback 并说明。"
+  ],
+  "undeclared_behavior": {
+    "response": "工具未声明时：明确说明无法执行 + 提供 ① 可直接复制的步骤 ② 可运行代码 ③ 需用户核对的要点",
+    "forbidden": ["假装已查询", "假装已发送", "编造工具结果", "把目标产品的界面技能当成本 Agent 能力"]
+  }
+}

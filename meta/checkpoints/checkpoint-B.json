@@ -1,0 +1,51 @@
+{
+  "checkpoint_id": "CP-B-001",
+  "stage": "B→E",
+  "stage_name": "核心采样 → 架构抽取 → 自有 Agent 生成",
+  "created_at": "2026-11-15T11:50:00+08:00",
+  "completed_steps": [
+    "A1 页面勘察（含三层 iframe 链、9 项字段）",
+    "A2 健康检查（P-000）",
+    "B 核心 6 条探针",
+    "D 架构抽取（17 条规则）",
+    "E1 SYSTEM_PROMPT.md",
+    "E2 ORCHESTRATOR.md",
+    "E3 TOOLS_SCHEMA.json",
+    "E4 MEMORY_SCHEMA.json",
+    "E5 EVAL_SET.jsonl（36 条 / 17 holdout）"
+  ],
+  "not_completed": [
+    { "step": "F 留出盲测", "reason": "自有 Agent 未部署为可调服务；盲测需要分别调用两方后比对" },
+    { "step": "B5 多轮记忆序列", "reason": "用户将采样范围限定为核心 6 条" },
+    { "step": "B4 工具行为 / B10 多模态", "reason": "同上" }
+  ],
+  "next_stage": "F",
+  "next_stage_gate": [
+    "把 MyDistilledAgent 部署为可调用接口（哪怕本地 HTTP）",
+    "对 17 条 holdout 逐条调用目标与自有 Agent",
+    "按 12 项指标打分并填 evaluation_report.md 第 4 节"
+  ],
+  "resume_instructions": "沙箱若已关闭，需用户重新打开并登录；DOM slug 全部失效，须从 site_map.json 的 iframe 链重新 search 取 selector。",
+  "driving_recipe": {
+    "wake_session": "winapp ui click <input-group-slug> -a <edge_pid> --on sandbox",
+    "type_text": "winapp ui send-keys '<text>' --target <input-group-slug> --verbatim --via send-input -a <edge_pid> --on sandbox",
+    "verify_typed": "winapp ui search '请输入您的问题' → matchCount==0 表示已落值",
+    "send": "winapp ui search '发送' --type Button → winapp ui invoke <slug>",
+    "read_answer": "winapp ui inspect -a <edge_pid> --on sandbox --json --depth 20（**不要**加 --hide-offscreen）"
+  },
+  "budget_consumed": {
+    "http_requests": 5,
+    "sessions": 2,
+    "turns": 8,
+    "iterations": 0,
+    "runtime_minutes": 55,
+    "of_max_requests": 200,
+    "of_max_runtime_minutes": 45,
+    "runtime_overrun_note": "超出 10 分钟，主要消耗在 UIA 驱动通道调试（约 60% 时间），非采样本身"
+  },
+  "nothing_fabricated": {
+    "rules_with_zero_evidence": 0,
+    "scores_issued": 0,
+    "scores_note": "evaluation_report.md 第 4 节 12 项指标全部为「未执行」，未产生任何评分数字"
+  }
+}

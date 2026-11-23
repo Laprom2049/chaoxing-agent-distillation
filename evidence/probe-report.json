@@ -1,0 +1,21 @@
+{
+  "probedAt": "2026-11-15T02:57:20.534Z",
+  "target": "https://mooc2-ans.chaoxing.com/mooc2-ans/mycourse/stu?courseid=<REDACTED>&clazzid=<REDACTED>&cpi=<REDACTED>&enc=7d5553547a8e5035beef32e6c97bc569&t=1794709680372&pageHeader=21&v=2&hideHead=0",
+  "browser": "chromium headless (executablePath override)",
+  "isolatedContext": true,
+  "exceptions": {},
+  "navigationError": null,
+  "page": {
+    "href": "https://passport2.chaoxing.com/login?refer=https%3A%2F%2Fmooc2-ans.chaoxing.com%2Fmooc2-ans%2Fmycourse%2Fstu%3Fcourseid%3D266030150%26clazzid%3D151774710%26cpi%3D482771538%26enc%3D7d5553547a8e5035beef32e6c97bc569%26t%3D1794709680372%26pageHeader%3D21%26v%3D2%26hideHead%3D0&fid=1840&newversion=true&_blank=0",
+    "title": "用户登录",
+    "passwordInputCount": 1,
+    "textareaCount": 0,
+    "formCount": 1,
+    "hasCaptchaElement": true,
+    "captchaInHtml": true,
+    "hasLoginForm": true,
+    "hasQrHint": true,
+    "bodyTextHead": "客服 用户登录 忘记密码？ 登录 下次自动登录 新用户注册 验证码登录 其他登录方式 我已阅读并同意学习通 《隐私政策》和 《用户协议》 使用学习通APP扫码登录 Copyright © 2026 北京世纪超星信息技术发展有限责任公司 京ICP备10040544号-2 京公网安备 11010802021885号"
+  },
+  "screenshot": "D:\\HuaweiMoveData\\Users\\<USER>\\Desktop\\工作区\\distilled_agent\\evidence\\probe-loginwall.png"
+}

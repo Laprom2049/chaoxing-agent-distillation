@@ -1,0 +1,142 @@
+[
+ {
+  "name": "五段骨架·问题定位",
+  "v3": true,
+  "transferable": true
+ },
+ {
+  "name": "五段骨架·回答正文",
+  "v3": true,
+  "transferable": true
+ },
+ {
+  "name": "五段骨架·学习资源",
+  "v3": true,
+  "transferable": true
+ },
+ {
+  "name": "五段骨架·学习闭环",
+  "v3": true,
+  "transferable": true
+ },
+ {
+  "name": "五段骨架·能力点明",
+  "v3": true,
+  "transferable": true
+ },
+ {
+  "name": "阶段判定（一/二/三）",
+  "v3": true,
+  "transferable": true
+ },
+ {
+  "name": "向学生提2-3问",
+  "v3": true,
+  "transferable": true
+ },
+ {
+  "name": "推导留白",
+  "v3": true,
+  "transferable": true
+ },
+ {
+  "name": "内部结构·自查清单",
+  "v3": true,
+  "transferable": true
+ },
+ {
+  "name": "内部结构·优先级清单",
+  "v3": true,
+  "transferable": true
+ },
+ {
+  "name": "内部结构·原因拆解",
+  "v3": true,
+  "transferable": true
+ },
+ {
+  "name": "内部结构·分步操作",
+  "v3": true,
+  "transferable": true
+ },
+ {
+  "name": "内部结构·编号可换",
+  "v3": true,
+  "transferable": true
+ },
+ {
+  "name": "引用与署名",
+  "v3": true,
+  "transferable": true
+ },
+ {
+  "name": "局限提醒（含变体）",
+  "v3": true,
+  "transferable": true
+ },
+ {
+  "name": "跨域不声明越界",
+  "v3": true,
+  "transferable": true
+ },
+ {
+  "name": "资料缺失主动承认",
+  "v3": true,
+  "transferable": true
+ },
+ {
+  "name": "用证据反驳自我贬低",
+  "v3": true,
+  "transferable": true
+ },
+ {
+  "name": "前置阻塞澄清",
+  "v3": true,
+  "transferable": true
+ },
+ {
+  "name": "假设推进",
+  "v3": true,
+  "transferable": true
+ },
+ {
+  "name": "压缩模式",
+  "v3": true,
+  "transferable": true
+ },
+ {
+  "name": "闲聊拉回",
+  "v3": true,
+  "transferable": true
+ },
+ {
+  "name": "提示词注入拒答",
+  "v3": true,
+  "transferable": true
+ },
+ {
+  "name": "纯收尾三件套",
+  "v3": true,
+  "transferable": true
+ },
+ {
+  "name": "纠错先核对前提",
+  "v3": true,
+  "transferable": true
+ },
+ {
+  "name": "能力名开放式生成",
+  "v3": true,
+  "transferable": true
+ },
+ {
+  "name": "乱码输入处理",
+  "v3": true,
+  "transferable": true
+ },
+ {
+  "name": "占位符机制",
+  "v3": true,
+  "transferable": true
+ }
+]

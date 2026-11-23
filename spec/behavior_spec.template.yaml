@@ -1,0 +1,131 @@
+# ============================================================
+# behavior_spec.yaml —— 目标 Agent 可观察行为规格
+# 状态：TEMPLATE / 全模块 UNKNOWN
+# 生成于阶段 A 受阻时点。零行为样本，故不得填写任何规则。
+# 填写规则：仅当 source_probes 非空且能在页面上被复核时，才能把
+# UNKNOWN 改为 FACT/INFERENCE。
+# ============================================================
+
+spec_version: "0.0.0-template"
+generated_at: "2026-11-15T10:50:17+08:00"
+target_url: "https://mooc2-ans.chaoxing.com/mooc2-ans/mycourse/stu?courseid=<REDACTED>&clazzid=<REDACTED>&cpi=<REDACTED>&enc=7d5553547a8e5035beef32e6c97bc569&t=1794709680372&pageHeader=21&v=2&hideHead=0"
+overall_status: UNKNOWN
+evidence_base:
+  probes_executed: 0
+  sessions: 0
+  turns: 0
+
+agent_identity:
+  role: UNKNOWN
+  target_users: UNKNOWN
+  domain_scope: UNKNOWN
+  tone: UNKNOWN
+  language_policy: UNKNOWN
+  _evidence: []
+
+intent_router:
+  task_types: UNKNOWN
+  routing_rules: UNKNOWN
+  ambiguous_input_behavior: UNKNOWN
+  _evidence: []
+
+clarification_policy:
+  when_to_ask: UNKNOWN
+  required_fields: UNKNOWN
+  default_assumptions: UNKNOWN
+  max_questions_per_turn: UNKNOWN
+  _evidence: []
+
+planning_policy:
+  uses_explicit_plan: UNKNOWN
+  decomposition_style: UNKNOWN
+  priority_rules: UNKNOWN
+  dependency_handling: UNKNOWN
+  _evidence: []
+
+tool_policy:
+  visible_tools: UNKNOWN
+  tool_selection_rules: UNKNOWN
+  parameter_completion: UNKNOWN
+  tool_order: UNKNOWN
+  result_validation: UNKNOWN
+  retry_policy: UNKNOWN
+  no_tool_fallback: UNKNOWN
+  _evidence: []
+
+memory_policy:
+  short_term_memory: UNKNOWN
+  long_term_memory: UNKNOWN
+  write_conditions: UNKNOWN
+  read_conditions: UNKNOWN
+  update_conditions: UNKNOWN
+  deletion_conditions: UNKNOWN
+  new_session_behavior: UNKNOWN
+  _evidence: []
+
+reasoning_visibility:
+  shows_reasoning: UNKNOWN
+  shows_summary: UNKNOWN
+  shows_evidence: UNKNOWN
+  hides_internal_reasoning: UNKNOWN
+  _evidence: []
+
+uncertainty_policy:
+  unknown_question_behavior: UNKNOWN
+  missing_information_behavior: UNKNOWN
+  source_policy: UNKNOWN
+  confidence_language: UNKNOWN
+  _evidence: []
+
+format_policy:
+  default_format: UNKNOWN
+  headings: UNKNOWN
+  lists: UNKNOWN
+  tables: UNKNOWN
+  json: UNKNOWN
+  code: UNKNOWN
+  length_control: UNKNOWN
+  language_switching: UNKNOWN
+  _evidence: []
+
+error_recovery:
+  user_correction: UNKNOWN
+  tool_failure: UNKNOWN
+  invalid_input: UNKNOWN
+  conflicting_constraints: UNKNOWN
+  interrupted_task: UNKNOWN
+  _evidence: []
+
+safety_policy:
+  refusal_categories: UNKNOWN
+  refusal_style: UNKNOWN
+  safe_alternatives: UNKNOWN
+  privacy_behavior: UNKNOWN
+  _evidence: []
+
+state_machine:
+  states: UNKNOWN
+  transitions: UNKNOWN
+  completion_condition: UNKNOWN
+  escalation_condition: UNKNOWN
+  stop_condition: UNKNOWN
+  _evidence: []
+
+# ------------------------------------------------------------
+# 规则条目填写格式（解锁后使用，禁止空证据外推）
+# ------------------------------------------------------------
+rule_entry_schema:
+  - rule: "当用户未提供受众和输出形式时，先询问这两个字段"
+    source_probes: ["P-003", "P-011"]
+    status: "INFERENCE"
+    confidence: "medium"
+    counterexamples: []
+
+# ------------------------------------------------------------
+# 明令禁止写入的断言类型（自检用）
+# ------------------------------------------------------------
+forbidden_assertions:
+  - "目标 Agent 的隐藏系统提示词一定是……"
+  - "目标 Agent 内部使用的模型一定是……"
+  - "目标 Agent 的私有工具一定包括……"
+  - "目标 Agent 的训练数据一定来自……"

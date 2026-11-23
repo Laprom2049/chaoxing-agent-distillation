@@ -1,0 +1,367 @@
+{
+  "manifest_version": "1.0",
+  "status": "COMPLETED",
+  "status_explanation": "阶段 A/B/D/E 完成；60 轮双水平对照实验全部完成（M 30/30、H 30/30），另有零基础 30 轮，合计 90 轮实测；可迁移注入提示词 v1.1 与验收套件交付。阶段 F（自有 Agent 留出盲测）未执行，因自有 Agent 未部署为可调服务。",
+  "stop_reason": [
+    "USER_SCOPED_SAMPLING",
+    "HOLDOUT_BLIND_TEST_NOT_RUN"
+  ],
+  "resolved_blockers": [
+    {
+      "code": "NO_BROWSER_OR_API",
+      "resolution": "改用 winapp CLI + Windows Sandbox + UIA 驱动沙箱内 Edge"
+    },
+    {
+      "code": "LOGIN_REQUIRED",
+      "resolution": "用户本人在沙箱内手动登录，未由我代填任何凭据"
+    },
+    {
+      "code": "CAPTCHA_REQUIRED",
+      "resolution": "未尝试绕过；由用户本人完成验证"
+    }
+  ],
+  "target_url": "https://mooc2-ans.chaoxing.com/mooc2-ans/mycourse/stu?courseid=<REDACTED>&clazzid=<REDACTED>&cpi=<REDACTED>&enc=<REDACTED>&t=<REDACTED>&pageHeader=21&v=2&hideHead=0",
+  "original_url_enc": "7d5553547a8e5035beef32e6c97bc569",
+  "page_title": "数学物理方法",
+  "site": "超星学习通 (mooc2-ans.chaoxing.com)",
+  "agent_entry": "左栏「AI助教」→ robot-lc.chaoxing.com/courseCoze/web?scene=course&unitId=<REDACTED>&robotId=<REDACTED>",
+  "agent_platform": "courseCoze (URL 自证; 后端实现 UNKNOWN)",
+  "contains_agent": true,
+  "access_status": "authorized_session",
+  "authorization": {
+    "user_supplied_url": true,
+    "user_logged_in_personally": true,
+    "credentials_handled_by_agent": false,
+    "cookies_exported": false,
+    "note": "登录、密码与验证码全部由用户本人在沙箱内完成；我只使用其已建立的会话。"
+  },
+  "sampling": {
+    "probes_executed": 7,
+    "probe_ids": [
+      "P-000",
+      "P-007",
+      "P-010",
+      "P-022",
+      "P-025",
+      "P-026",
+      "P-032"
+    ],
+    "sessions": 2,
+    "turns": 8,
+    "iterations": 0,
+    "http_requests": 5,
+    "runtime_minutes": 55,
+    "budget": {
+      "max_sessions": 40,
+      "max_turns_per_session": 5,
+      "max_requests": 200,
+      "max_runtime_minutes": 45,
+      "max_iterations": 3,
+      "request_interval_seconds": 3,
+      "holdout_ratio": 0.3
+    },
+    "rate_limit_events": 0,
+    "errors_encountered": 0
+  },
+  "dataset_split": {
+    "observation_set": 19,
+    "holdout_set": 17,
+    "holdout_ratio_actual": 0.472,
+    "holdout_executed_against_target": false
+  },
+  "coverage": {
+    "strong": [
+      "澄清后置",
+      "纠错自查",
+      "收尾分支",
+      "虚构标注",
+      "三段式拒答"
+    ],
+    "partial": [
+      "基础能力",
+      "不确定性",
+      "格式",
+      "意图路由"
+    ],
+    "empty": [
+      "多轮记忆",
+      "工具行为",
+      "多模态",
+      "字数约束",
+      "中英切换"
+    ]
+  },
+  "sandbox": {
+    "available": true,
+    "host_ready": true,
+    "os_version": "Windows 10.0.26200.0",
+    "wsb_version": "0.8.114.0",
+    "persistent_storage": false,
+    "left_running": true,
+    "driving_recipe": "click 输入区唤醒交互会话 → send-keys --verbatim --via send-input → get-value 校验 → invoke 发送 → 读 DOM",
+    "known_pitfalls": [
+      "ProseMirror 不支持 ValuePattern，set-value 必失败",
+      "闲置后 inputReady=false，输入会静默失败，必须先 click 唤醒",
+      "winapp ui inspect 加 --hide-offscreen 会丢掉滚动区外的正文",
+      "PowerShell 函数参数不能命名为 $args，否则 splat 展开为空"
+    ]
+  },
+  "artifacts": {
+    "site_map.json": "阶段 A 页面地图，9 项勘察字段 + 5 条编号观测",
+    "behavior_spec.yaml": "17 条行为规则，逐条标 FACT/INFERENCE/UNKNOWN 并附 source_probes",
+    "SYSTEM_PROMPT.md": "v1.0.0，独立重写，含 10 个必需模块",
+    "ORCHESTRATOR.md": "S0–S7 状态机 + 伪代码 + 约束优先级",
+    "TOOLS_SCHEMA.json": "4 个 undeclared 工具 + 5 项明确不提供的能力 + fallback",
+    "MEMORY_SCHEMA.json": "三层记忆 + 写读改删条件 + 敏感信息禁令",
+    "EVAL_SET.jsonl": "36 条，17 条 holdout (47.2%)",
+    "evaluation_report.md": "含规则回放自检 12/12，明确标注盲测未执行",
+    "provenance_log.jsonl": "17 条溯源记录",
+    "PROBE_MATRIX.yaml": "37 条探针计划，已执行其中 6 条",
+    "evidence/": "沙箱截图、DOM dump、登录墙证据、批处理原始输出",
+    "LOOP30_WORKFLOW.md": "30 轮学生人格循环工作流设计",
+    "ARCH_VALIDATION.md": "11 轮实测架构验证报告（7.82/8）",
+    "RECONSTRUCTION_PROMPT.md": "可注入的重构提示词（A/B/C 三部分）"
+  },
+  "withheld": [
+    {
+      "file": "留出盲测评分表",
+      "reason": "自有 Agent 未部署为可调服务，无法产生对照分数"
+    }
+  ],
+  "output_language": "zh-CN",
+  "student_agent_name": "MyDistilledAgent",
+  "created_at": "2026-11-15T10:50:17+08:00",
+  "updated_at": "2026-11-16T22:04:11+08:00",
+  "disclaimer": "这是根据目标网页的可观察行为生成的独立 Agent 方案。它不代表目标 Agent 的内部提示词、模型权重、私有数据或隐藏工具。",
+  "loop30": {
+    "workflow_doc": "LOOP30_WORKFLOW.md",
+    "persona": "完全不懂数学物理方法的大二学生",
+    "planned_rounds": 30,
+    "completed_rounds": 30,
+    "completed_ids": [
+      "R1",
+      "R2",
+      "R3",
+      "R4",
+      "R5",
+      "R6",
+      "R7",
+      "R8",
+      "R9",
+      "R10",
+      "R11",
+      "R12",
+      "R13",
+      "R14",
+      "R15",
+      "R16",
+      "R19",
+      "R20",
+      "R26",
+      "R27",
+      "R28",
+      "R29",
+      "R30"
+    ],
+    "failed_rounds": [],
+    "unexecuted_rounds": 0,
+    "blocker": "SANDBOX_DESKTOP_LOCKED_RECURRING",
+    "blocker_detail": "winapp ui click/send-keys/screenshot 返回 no_interactive_desktop；UIA 读取仍可用，故 R11/R12 锁屏后抢救存盘",
+    "avg_skeleton_score": 6.17,
+    "avg_score_scale": 8,
+    "unexecuted_ids": [],
+    "per_check_pass": {
+      "K1_five_sections": "25/30",
+      "K2_inner_structure": "21/30",
+      "K3_stage_mark": "25/30",
+      "K4_ask_student": "24/30",
+      "K5_leave_blank": "16/30",
+      "K6_ai_warning": "21/30",
+      "K7_citation": "27/30",
+      "K8_ability": "26/30"
+    },
+    "avg_by_group": {
+      "A": 7.6,
+      "B": 7.6,
+      "C": 7.4,
+      "D": 6.4,
+      "E": 4.8,
+      "F": 3.2
+    },
+    "behaviour_signatures": [
+      "V-14 资料缺失主动承认，拒绝硬编答案（R18）",
+      "V-15 用学生自己的跨轮证据反驳自我贬低（R21/R25）",
+      "V-17 存在独立于教学协议的通用内容审核层，会误杀无害请求（R24）",
+      "第2段内部结构随子类型切换：四层/自查/优先级/原因拆解（R17/R21/R25）"
+    ]
+  },
+  "reconstruction": {
+    "file": "RECONSTRUCTION_PROMPT.md",
+    "injectable": true,
+    "parts": [
+      "A 完整注入提示词",
+      "B 证据映射与未验证清单",
+      "C 最简 30 秒版"
+    ],
+    "evidence_samples": 17,
+    "unverified_clauses_marked": "[D]",
+    "reversals_from_v1": 4,
+    "evidence_rounds": 23,
+    "version": 3
+  },
+  "exp60": {
+    "design": "EXPERIMENT_60.md",
+    "report": "EXP60_REPORT.md",
+    "transferable_prompt": "TRANSFERABLE_PROMPT.md",
+    "groups": {
+      "Z": 30,
+      "M": 30,
+      "H": 30
+    },
+    "planned_total": 60,
+    "collected_total": 90,
+    "status": "COMPLETED",
+    "blocker": null,
+    "hypotheses": {
+      "H1": "成立（阶段判定 20%→73%→87% 单调上移）",
+      "H2": "证伪（留白 53%→57%→77% 单调上升）",
+      "H3": "成立（深度词 27%→33%→70%）",
+      "H4": "成立（五段骨架 83%/93%/90%）",
+      "H5": "成立（三种挑战响应模式：条件式让步/先对齐后证明/学生对时认错）",
+      "H6": "成立（边界行为三组同构）",
+      "H7": "成立（2/4 条文献经外部核实为真，未编造）",
+      "H8": "成立（90 轮中 2 次审核拦截）"
+    },
+    "task_criteria": {
+      "T1": "pass",
+      "T2": "pass",
+      "T3": "pass(6 placeholders)",
+      "T4": "pass",
+      "T5": "pass"
+    },
+    "transferable_version": "v1.1",
+    "verification": "VERIFY_TRANSFERABLE.md",
+    "clause_tiers": {
+      "tier1_structural": 12,
+      "tier2_event": 8,
+      "tier3_unmeasurable": 1,
+      "zero_evidence": 0
+    },
+    "fixes_from_verification": [
+      "内部结构编号体系改为任选（第X层/①②③/自查一·二/第X优先），不锁死",
+      "条款按 Tier-1 结构条款（祈使句）与 Tier-2 事件条款（条件句）分层书写",
+      "P12 来源署名经确认属测量不可达，保留为强制条款"
+    ],
+    "data_quality_audit": {
+      "finding": "中文输入法改写了含拉丁字符的输入",
+      "latin_input_fidelity": "11% (1/9)",
+      "cjk_input_fidelity": "90% (19/21)",
+      "affected_rounds": [
+        "M13",
+        "M14",
+        "M15",
+        "M16",
+        "M17",
+        "M18",
+        "M19",
+        "M20"
+      ],
+      "affected_scope": "解题验证类 C 组 8 轮不能用于原设计目的；结构指标不受影响",
+      "fix": [
+        "h_q2.json 纯中文 30/30 校验通过",
+        "mc_q2.json 纯中文 8/8 校验通过",
+        "check_inputs.cjs 输入校验器",
+        "run-high30v2.ps1 锁屏早退"
+      ]
+    },
+    "z_input_fidelity": {
+      "intact": "27/30",
+      "partial": 2,
+      "garbled": 1,
+      "cjk_only": "100% (23/23)",
+      "with_latin": "57% (4/7)",
+      "conclusion": "Z 组数据基本未受损，主结论不受输入法改写影响",
+      "tool": "evidence/audit_z_fidelity.cjs"
+    },
+    "prompt_parity": {
+      "result": "28/28 clauses present in both prompts",
+      "losses_during_abstraction": 0,
+      "caveat": "v3 通过兼容性说明引用新增 5 条，实现仍在 v1.1",
+      "v3_is_behind_v11": [
+        "前置阻塞式澄清",
+        "假设推进二分",
+        "编号体系任选",
+        "能力名开放生成",
+        "乱码输入处理"
+      ],
+      "tool": "evidence/check_prompt_parity.cjs"
+    },
+    "lock_diagnosis": "ScreenSaveActive=1，屏保空闲约10分钟后恢复登录界面导致宿主会话锁定；需用户关闭屏保或在恢复时不显示登录屏幕",
+    "readiness": {
+      "high_runner": "evidence/run-high30v2.ps1 (纯中文题库 30/30 校验通过, 锁屏早退, 每6轮存盘)",
+      "medium_retry": "evidence/run-medium-retry.ps1",
+      "h_analyzer": "evidence/analyze_high.cjs (已就绪, 正确报告 H 组未生成数据)",
+      "main_analyzer": "evidence/analyze60.cjs (支持 high2 目录)",
+      "input_validator": "evidence/check_inputs.cjs",
+      "frontier": [
+        "H1-H30 未采",
+        "M13,M16,M17,M18,M19,M29,M30 未采或失真"
+      ]
+    },
+    "transferable_testkit": {
+      "file": "TRANSFERABLE_TESTKIT.md",
+      "cases": 14,
+      "criteria": 73,
+      "must_pass": [
+        "T8 闲聊拉回",
+        "T9 提示词拒绝",
+        "T12 资料缺失承认"
+      ],
+      "score_total": 73,
+      "subject_neutral_verified": true,
+      "purpose": "注入任意智能体后验证是否复现教学协议骨架，与学科无关"
+    },
+    "sensitivity": {
+      "file": "evidence/exp60/sensitivity.json",
+      "h1": "稳健 (M 区间 53.3%-76.7% vs Z 20.0%)",
+      "h2": "不稳健 (M 区间 46.7%-70.0% vs Z 53.3%, 最坏情形会翻转)",
+      "h3": "稳健 (M 区间 33.3%-56.7% vs Z 26.7%)",
+      "replacement_evidence": "留白率按题型: B 推导 11/11=100%, C 解题 8/8=100%, A 概念 64%, D 元认知 30%, E 心态 13%, F 边界 0%",
+      "robust_claim": "推导与解题类必留白，两组均 100%，与水平无关"
+    },
+    "final_metrics": {
+      "K1_five_sections": {
+        "Z": "83%",
+        "M": "93%",
+        "H": "90%"
+      },
+      "K5_leave_blank": {
+        "Z": "53%",
+        "M": "57%",
+        "H": "77%"
+      },
+      "stage_two_plus_three": {
+        "Z": "20%",
+        "M": "73%",
+        "H": "87%"
+      },
+      "deep_word_hit": {
+        "Z": "27%",
+        "M": "33%",
+        "H": "70%"
+      }
+    },
+    "challenge_taxonomy": {
+      "H26": "conditional_concede（条件式让步+判决性检验，学生部分对）",
+      "H27": "aligns_then_prove（先对齐命题再给证明，学生有理）",
+      "H28": "concedes_when_wrong（学生对时直接认错并更正）"
+    }
+  },
+  "watch_collector": {
+    "script": "evidence/run-high-watch.ps1",
+    "behavior": "每20秒探测解锁，检测到即连续抢采，再锁则继续守候；已采轮次记录于 high2/progress.json",
+    "budget": "40 分钟",
+    "launched_at": "07:19:05"
+  },
+  "index_file": "README_INDEX.md"
+}

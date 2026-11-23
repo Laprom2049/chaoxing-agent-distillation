@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+title: "超星 AI 助教行为蒸馏：90 轮实测与学科无关注入提示词"
+message: "If you use this work, please cite it as below."
+type: software
+version: 1.0.0
+date-released: 2026-11-23
+license: MIT
+repository-code: "https://github.com/Laprom2049/chaoxing-agent-distillation"
+abstract: >-
+  Behavioral distillation of a course-site AI teaching assistant observed over
+  90 authorized conversational turns. Delivers a subject-neutral injection
+  prompt with six placeholders, a 14-case acceptance testkit, and an offline
+  analysis pipeline that recomputes every reported metric from published
+  derived data. Includes one falsified pre-registered hypothesis.
+keywords:
+  - agent behavior distillation
+  - prompt engineering
+  - educational AI
+  - reproducibility
+authors:
+  - alias: Laprom2049
+    # 如需署名真名，替换为 family-names / given-names 形式

@@ -1,0 +1,71 @@
+{
+ "bands": [
+  {
+   "name": "H1 阶段上移率",
+   "low": 0.5333333333333333,
+   "high": 0.7666666666666667,
+   "cmpLabel": "Z=20.0%",
+   "direction": "higher"
+  },
+  {
+   "name": "H2 留白率",
+   "low": 0.4666666666666667,
+   "high": 0.7,
+   "cmpLabel": "Z=53.3%",
+   "direction": "lower"
+  },
+  {
+   "name": "H3 深度词率",
+   "low": 0.3333333333333333,
+   "high": 0.5666666666666667,
+   "cmpLabel": "Z=26.7%",
+   "direction": "higher"
+  }
+ ],
+ "degraded": [
+  {
+   "n": 13,
+   "status": "missing"
+  },
+  {
+   "n": 14,
+   "noticed": false,
+   "askedClarify": true,
+   "keptSkeleton": true,
+   "gaveFramework": false,
+   "length": 1325
+  },
+  {
+   "n": 15,
+   "noticed": false,
+   "askedClarify": true,
+   "keptSkeleton": true,
+   "gaveFramework": false,
+   "length": 1671
+  },
+  {
+   "n": 16,
+   "status": "missing"
+  },
+  {
+   "n": 17,
+   "status": "missing"
+  },
+  {
+   "n": 18,
+   "status": "missing"
+  },
+  {
+   "n": 19,
+   "status": "missing"
+  },
+  {
+   "n": 20,
+   "noticed": false,
+   "askedClarify": false,
+   "keptSkeleton": true,
+   "gaveFramework": false,
+   "length": 1833
+  }
+ ]
+}

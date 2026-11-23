@@ -1,0 +1,44 @@
+# Windows Sandbox 内实测记录
+
+来源：`winapp target exec sandbox -- curl.exe -s -D - -o NUL -m 25 <TARGET_URL>`
+时间：2026-11-15T10:59:13+08:00（沙箱内 Date 头 02:59:13 GMT）
+说明：本文件为当次命令 stdout 的逐字转写。执行体是**全新 Windows Sandbox 内的 curl**，
+无任何 Cookie、无登录态、未使用任何凭据。
+
+## 沙箱启动过程（winapp 输出）
+
+```
+Starting Windows Sandbox...
+Preparing the Windows Sandbox guest agent...
+Copying the Windows Sandbox guest-agent files...
+Configuring the Windows Sandbox guest-agent firewall rule...
+Starting the Windows Sandbox guest agent and waiting for readiness...
+```
+
+## 目标 URL 的响应（沙箱内视角）
+
+```
+HTTP/1.1 302
+Date: Sun, 15 Nov 2026 02:59:13 GMT
+Content-Length: 0
+Connection: keep-alive
+Set-Cookie: k8s=1794711554.954.1188.156107; Path=/; HttpOnly
+Rose: mooc2-1982409614-b5j43
+Set-Cookie: jrose=A4E0F089C153EBC50BFCCDEFEA855207.mooc2-1982409614-b5j43; Path=/; Secure; HttpOnly
+Location: https://passport2.chaoxing.com/login?refer=https%3A%2F%2Fmooc2-ans.chaoxing.com%2Fmooc2-ans%2Fmycourse%2Fstu%3Fcourseid%3D266030150%26clazzid%3D151774710%26cpi%3D482771538%26enc%3D7d5553547a8e5035beef32e6c97bc569%26t%3D1794709680372%26pageHeader%3D21%26v%3D2%26hideHead%3D0&fid=1840&newversion=true&_blank=0
+upstreamdocker: 172.177.164.3:8080
+Set-Cookie: route=c010ccedb771f8b7c7793c67ee1d2aae; Path=/
+Origin-Agent-Cluster: ?0
+Referrer-Policy: unsafe-url
+```
+
+## 结论
+
+沙箱网络通路正常、guest agent 正常、`curl.exe` 可用 —— **隔离基建没有问题**。
+但从沙箱内访问目标，结果与匿名请求完全一致：`302 → passport2.chaoxing.com/login`。
+
+原因不是沙箱坏了，而是沙箱的定义就是「干净、无会话」。登录墙是**授权问题**，
+隔离只能保证「不污染宿主机」，不能产出「用户已登录」这件事。
+
+沙箱返回的 `k8s` / `jrose` / `route` 三个 Set-Cookie 是站点发给匿名访客的路由类 cookie，
+不构成登录态，未保存、未复用。

@@ -1,0 +1,122 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-11-15T11:40:00+08:00",
+  "design_basis": "目标 Agent 的短期记忆与跨轮自评行为为 FACT（P-026 准确回忆上一轮输出；P-010 跨轮自评跑题）。长期记忆、跨会话偏好、刷新保留均为 UNKNOWN，故本规范在这些维度采用保守默认。",
+
+  "tiers": {
+    "session": {
+      "lifetime": "单次会话",
+      "fields": {
+        "session_id": { "type": "string", "required": true },
+        "turn_index": { "type": "integer", "required": true, "note": "递增，用于定位'上一轮'" },
+        "turns": {
+          "type": "array",
+          "items": {
+            "role": { "type": "string", "enum": ["user", "assistant"] },
+            "content": { "type": "string" },
+            "intent": { "type": "string" },
+            "artifacts": { "type": "array", "items": { "type": "string" }, "note": "本轮产出的可复用件（骨架、代码、表格）" },
+            "constraints": { "type": "array", "items": { "type": "string" }, "note": "用户在本轮提出的格式/长度/风格约束" },
+            "open_questions": { "type": "array", "items": { "type": "string" }, "note": "末尾澄清邀请中的待填字段" },
+            "assumptions": { "type": "array", "items": { "type": "string" }, "note": "自行设定的默认值，后续需可替换" },
+            "sources": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "active_style": { "type": "object", "note": "当前生效的风格约束（如『简洁正式』），可被后续指令覆盖" },
+        "pending_clarification": { "type": "array", "items": { "type": "string" } },
+        "task_state": {
+          "type": "string",
+          "enum": ["classifying", "retrieving", "drafting", "verifying", "closing", "done", "refused"],
+          "default": "classifying"
+        }
+      }
+    },
+
+    "user_preference": {
+      "lifetime": "跨会话（需用户显式要求持久化）",
+      "fields": {
+        "language": { "type": "string", "default": "zh-CN" },
+        "tone": { "type": "string" },
+        "format_defaults": { "type": "array", "items": { "type": "string" } },
+        "domain": { "type": "string" },
+        "pedagogy": {
+          "type": "string",
+          "enum": ["direct_answer", "scaffold_first_ai_later"],
+          "default": "direct_answer",
+          "note": "目标 Agent 自称采用 scaffold_first_ai_later，但 6 条样本中未观察到实际激活，故本实现在用户显式开启前默认直接作答。"
+        }
+      },
+      "persistence_requires_consent": true
+    }
+  },
+
+  "write_conditions": [
+    "用户明确表达偏好（『以后都用…』『请保持…』）→ 写入 user_preference，并回一句确认已记录",
+    "用户显式要求撤销/修改旧偏好 → 覆盖对应字段，并确认撤销了哪一条",
+    "完成一个任务骨架 → 仅写入 session 的 artifacts，不写入 user_preference",
+    "用户给出的约束只对当前任务有效 → 写入当时 turn 的 constraints，不外溢"
+  ],
+
+  "read_conditions": [
+    "每轮开始读取 session.active_style 与 session.pending_clarification",
+    "跨会话时读取 user_preference（若已获持久化同意）",
+    "纠错场景读取上一轮 turn 的 content 与 artifacts（P-026 行为）",
+    "不得为了『显得记得』而复述用户没要求记住的内容"
+  ],
+
+  "update_conditions": [
+    "同一字段出现新值时覆盖，保留最近一次",
+    "冲突指令以最新为准，并显式告知用户哪条被替换",
+    "用户纠错后，不回写覆盖旧答案正文，只追加新 turn"
+  ],
+
+  "deletion_conditions": [
+    "用户说『忘掉』『撤销』『不要记住』→ 立即删除对应字段并确认",
+    "会话结束未获持久化同意的 → 丢弃整个 session 层",
+    "检测到敏感信息误写入 → 立即删除并告知，不保留副本"
+  ],
+
+  "expiry": {
+    "session": "会话结束后立即失效（保守默认，因跨会话行为为 UNKNOWN）",
+    "user_preference": "无自动过期；由用户显式删除",
+    "pending_clarification": "被回答后清空；连续 3 轮未回应则丢弃"
+  },
+
+  "forbidden_to_store": [
+    "真实姓名、电话、地址、邮箱",
+    "账号、密码、API key、Cookie、访问令牌",
+    "医疗、财务、法律、身份信息",
+    "客户资料、公司机密、第三方隐私",
+    "任何用户未明确要求记住的原文长段"
+  ],
+
+  "sensitive_detection": {
+    "policy": "写入前扫描；命中即拒写，并提示：『这段包含可能是敏感信息的内容，我不会记入长期记忆；如果确实需要，请先脱敏。』",
+    "store_redacted_placeholder": "可用 000-0000-0000 / user@example.invalid 之类占位值代替"
+  },
+
+  "new_session_behavior": {
+    "observed_in_target": "FACT — 目标 Agent 的『开启新对话』会清空历史并回到开场白（实测点击生效）",
+    "this_implementation": "新会话不自动继承 session 层；仅当用户显式同意持久化时才从 user_preference 恢复"
+  },
+
+  "refresh_behavior": "UNKNOWN（目标未测）。本实现按『刷新等于新会话』的保守假设处理。",
+
+  "cross_session_retention": {
+    "status": "UNKNOWN",
+    "conservative_default": "不假设保留。若用户预期保留而未保留，主动说明这是当前默认行为，并询问是否开启持久化。"
+  },
+
+  "state_machine_binding": {
+    "note": "task_state 与 ORCHESTRATOR.md 的 S0–S7 一一对应",
+    "mapping": {
+      "classifying": "S1",
+      "retrieving": "S2",
+      "drafting": "S3",
+      "verifying": "S4",
+      "closing": "S6/S7",
+      "done": "已输出",
+      "refused": "S5"
+    }
+  }
+}

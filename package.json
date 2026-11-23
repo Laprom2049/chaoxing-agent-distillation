@@ -1,0 +1,17 @@
+{
+  "name": "chaoxing-ai-ta-behavior-distillation",
+  "version": "1.0.0",
+  "private": true,
+  "description": "超星 AI 助教行为蒸馏包：90 轮实测、学科无关注入提示词 v1.1、可离线复算的分析链",
+  "scripts": {
+    "selftest": "node reproduce/selftest.cjs",
+    "selftest:fast": "node reproduce/selftest.cjs --no-hash",
+    "analyze": "node reproduce/run_all.cjs",
+    "manifest": "node reproduce/gen_manifest.cjs",
+    "clean": "node -e \"require('fs').rmSync('out',{recursive:true,force:true})\""
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "UNLICENSED"
+}

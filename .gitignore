@@ -1,0 +1,21 @@
+# 重算产物
+/out/
+
+# 原始采集数据不入库：含账号上下文与页面会话信息，已脱敏但主体仍是个人学习记录。
+# 公开仓库只保留派生指标与题库，见 README「数据与隐私」。
+/evidence/*
+!/evidence/exp60/
+!/evidence/rounds-all-extracted.json
+!/evidence/sandbox-probe.txt
+!/evidence/probe-report.json
+/evidence/exp60/*
+!/evidence/exp60/*.json
+
+# 本机构建工具（含原始路径，仅用于一次性迁移）
+/meta/build/
+
+# 本地覆盖项
+.env.ps1
+*.log
+Thumbs.db
+desktop.ini

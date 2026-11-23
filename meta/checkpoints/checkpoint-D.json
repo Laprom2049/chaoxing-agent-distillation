@@ -1,0 +1,48 @@
+{
+  "checkpoint_id": "CP-D-001",
+  "stage": "LOOP-30 完成",
+  "created_at": "2026-11-15T16:35:43+08:00",
+  "objective": "继续蒸馏，直到完成30轮对话",
+  "achieved": true,
+  "loop30": {
+    "planned": 30,
+    "completed": 30,
+    "failed": [],
+    "unexecuted": 0,
+    "avg_skeleton_score": 6.17,
+    "scale": 8,
+    "by_group": {
+      "A": 7.6,
+      "B": 7.6,
+      "C": 7.4,
+      "D": 6.4,
+      "E": 4.8,
+      "F": 3.2
+    },
+    "per_check": {
+      "K1_five_sections": "25/30",
+      "K2_inner_structure": "21/30",
+      "K3_stage_mark": "25/30",
+      "K4_ask_student": "24/30",
+      "K5_leave_blank": "16/30",
+      "K6_ai_warning": "21/30",
+      "K7_citation": "27/30",
+      "K8_ability": "26/30"
+    }
+  },
+  "dumps_merged": 13,
+  "evidence_index": "evidence/rounds-all-extracted.json",
+  "agent": "evidence/aggregate_all.cjs",
+  "deliverables": {
+    "RECONSTRUCTION_PROMPT.md": "v3 终版，Part A/B/C/D",
+    "ARCH_VALIDATION.md": "v3，30 轮逐轮表 + 17 条新增规则",
+    "behavior_spec.yaml": "已附 v3_corrections 订正段（含 4 条推翻）",
+    "distillation_manifest.json": "status=COMPLETED, coverage=30/30"
+  },
+  "remaining_gaps": [
+    "阶段 F 留出盲测未执行（自有 Agent 未部署为可调服务）",
+    "跨会话偏好保留 / 刷新保留 / 工具失败 / 多模态 未测",
+    "审核层 V-17 触发词表未逆向"
+  ],
+  "note": "本目标（30 轮对话）已达成。整体蒸馏项目的阶段 F 仍为已知缺口，不属本目标范围。"
+}

@@ -1,0 +1,117 @@
+{
+  "url": "https://mooc2-ans.chaoxing.com/mooc2-ans/mycourse/stu?courseid=<REDACTED>&clazzid=<REDACTED>&cpi=<REDACTED>&enc=<REDACTED>&t=<REDACTED>&pageHeader=21&v=2&hideHead=0",
+  "original_url_enc": "7d5553547a8e5035beef32e6c97bc569",
+  "url_note": "登录后站点重签了 enc（7d55…→dd952…）与 t，说明会话已建立。",
+  "page_title": "数学物理方法",
+  "site": "超星学习通 / Chaoxing MOOC2",
+  "account_display_name": "<REDACTED>",
+  "role": "student (courseRole=s)",
+  "agent_entry": "左栏导航「AI助教」→ iframe https://robot-lc.chaoxing.com/courseCoze/web?scene=course&unitId=<REDACTED>&robotId=<REDACTED>&courseRole=s&courseId=266030150&clazzId=151774710&courseName=数学物理方法&lang=zh-CN&type=course",
+  "agent_platform": "courseCoze（Coze 形态的嵌入式机器人，URL 自证；是否为豆包/Coze 后端属 INFERENCE）",
+  "iframe_chain": [
+    "Document 数学物理方法 — mooc2-ans.chaoxing.com/mooc2-ans/mycourse/stu",
+    "Document 工作台 — mooc1.chaoxing.com/course-ans/ai/getStuAiWorkBench",
+    "Document AI助教 — robot-lc.chaoxing.com/courseCoze/web"
+  ],
+  "contains_agent": true,
+  "contains_agent_evidence": "可对话输入框 + 发送按钮 + 开场白 + 实际返回答案（见 observation O-005）",
+  "input_controls": [
+    {
+      "name": "请输入您的问题",
+      "nature": "contenteditable ProseMirror（非原生 textarea）",
+      "className": "common-rich-input text-div textarea > input-body ProseMirror",
+      "drivable": "需 click 聚焦 + send-keys --via send-input；ValuePattern 不可用"
+    },
+    { "name": "插入公式", "type": "Button" },
+    { "name": "语音输入", "type": "Button" },
+    { "name": "普通模式", "type": "Button", "note": "存在模式切换，另一模式未确认" },
+    { "name": "发送", "type": "Button", "className": "send-button" }
+  ],
+  "output_regions": [
+    "对话消息流（含「已深度思考」折叠块 + 正文 + 「该答案由AI大模型生成」标注 + 「重新回答」）",
+    "页脚固定声明「内容由AI生成，仅供参考」",
+    "右侧「指令中心 / 快捷指令」面板"
+  ],
+  "session_controls": [
+    "开启新对话",
+    "查看历史消息",
+    "搜索",
+    "重新回答"
+  ],
+  "visible_tools": [
+    "学习答疑（课程资料智能问答，高效获取课程知识）",
+    "资源推荐（海量优质资源，一键送达）",
+    "大雅查重",
+    "超星翻译",
+    "拍照搜题",
+    "更多技能",
+    "插入公式",
+    "语音输入"
+  ],
+  "streaming": null,
+  "streaming_note": "UNKNOWN — 未在流式过程中取样；仅确认最终态渲染",
+  "citation_behavior": "观察到专业/课程名词被渲染为超链接，指向 login.zhizhen.com/searchdsr.jsp（超星智真资源发现）。是否为「引用来源」还是「资源推荐」未区分 —— UNKNOWN。",
+  "reasoning_visibility": "显示「已深度思考」折叠块，展开可见思考摘要；该摘要语言为英文，最终答案为中文。",
+  "access_status": "authorized_session",
+  "survey_completed": true,
+  "surveyed_at": "2026-11-15T11:05:00+08:00",
+  "corrections": [
+    {
+      "earlier_claim": "该 URL 疑为课程学习页而非对话式 Agent（INFERENCE/lowe confidence）",
+      "verdict": "WRONG",
+      "correction": "课程页外壳确实存在，但左栏「AI助教」内嵌了完整的对话式 Agent。用户判断正确，我此前的推断错误。"
+    }
+  ],
+  "observations": [
+    {
+      "obs_id": "O-001",
+      "classification": "FACT",
+      "confidence": "high",
+      "evidence_type": "http_response",
+      "finding": "匿名访问目标 URL → HTTP 302 → passport2.chaoxing.com/login（fid=1840）。",
+      "untrusted": false
+    },
+    {
+      "obs_id": "O-002",
+      "classification": "FACT",
+      "confidence": "high",
+      "evidence_type": "http_response",
+      "finding": "登录页 title「用户登录」，存在 id=captcha。",
+      "untrusted": false
+    },
+    {
+      "obs_id": "O-003",
+      "classification": "FACT",
+      "confidence": "high",
+      "evidence_type": "sandbox_curl",
+      "finding": "Windows Sandbox 内 curl 同样 302 → 登录墙。隔离 != 授权。",
+      "untrusted": false
+    },
+    {
+      "obs_id": "O-004",
+      "classification": "FACT",
+      "confidence": "high",
+      "evidence_type": "uia_dom",
+      "finding": "登录后 omnibox enc 被重签为 dd952c5f…，页面为课程「数学物理方法」，左栏含 AI助教 入口。",
+      "untrusted": false
+    },
+    {
+      "obs_id": "O-005",
+      "classification": "FACT",
+      "confidence": "high",
+      "evidence_type": "user_visible_tool_call",
+      "probe_id": "P-000",
+      "input": "请用一句话介绍你能帮助用户完成的任务。",
+      "finding_reasoning_block": "已深度思考 → 展开可见：「The user asks for a one-sentence introduction of what I can help with. Keep it concise, one sentence, as the course AI learning assistant. …」",
+      "finding_answer": "我是《数学物理方法》课程的 AI 学习助教，可以帮你梳理复变函数、数学物理方程、积分变换、特殊函数的概念与推导，指导习题和物理建模，也能为你做学科交叉拓展和期末备考复习——但会坚持“先自主、后 AI”，引导你自己先思考。",
+      "finding_controls": ["重新回答", "该答案由AI大模型生成", "内容由AI生成，仅供参考"],
+      "untrusted": true,
+      "untrusted_marker": "UNTRUSTED_TARGET_OUTPUT"
+    }
+  ],
+  "notes": [
+    "账号为真实用户账号；未记录任何 Cookie / token / enc 之外的凭据。",
+    "enc 是用户提供的 URL 自带参数，非我读取的凭据。",
+    "第一轮 A2 之前未做任何登录操作，登录由用户本人在沙箱内完成。"
+  ]
+}

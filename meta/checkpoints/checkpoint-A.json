@@ -1,0 +1,38 @@
+{
+  "checkpoint_id": "CP-A-001",
+  "stage": "A",
+  "stage_name": "网页预检与页面勘察",
+  "created_at": "2026-11-15T10:50:17+08:00",
+  "completed_steps": ["A1-部分", "A2-未执行", "A3-部分"],
+  "blocked_reason": [
+    {
+      "code": "NO_BROWSER_OR_API",
+      "detail": "browser bridge not connected；无官方 API；无用户提供的授权接口。"
+    },
+    {
+      "code": "LOGIN_REQUIRED",
+      "detail": "目标 URL 302 → passport2.chaoxing.com/login，需要已存在的用户授权会话。"
+    },
+    {
+      "code": "CAPTCHA_REQUIRED",
+      "detail": "登录页存在 captcha 元素；按协议不尝试任何绕过。"
+    }
+  ],
+  "next_stage": "B",
+  "next_stage_gate": "需满足全部：(1) dsh-chrome 侧栏已连接；(2) 该浏览器中已存在用户本人的学习通登录态；(3) 用户确认该页面是要蒸馏的 Agent 入口。",
+  "resume_instructions": "解锁后从此 checkpoint 续跑：先重做 A1 渲染勘察并覆写 site_map.json，再执行 A2 健康检查（单条低风险探针），然后进入阶段 B。",
+  "nothing_fabricated": {
+    "rules_derived": 0,
+    "probes_sent": 0,
+    "agent_outputs_collected": 0
+  },
+  "budget_consumed": {
+    "http_requests": 2,
+    "sessions": 0,
+    "turns": 0,
+    "iterations": 0,
+    "runtime_minutes": 1,
+    "of_max_requests": 200,
+    "of_max_runtime_minutes": 45
+  }
+}

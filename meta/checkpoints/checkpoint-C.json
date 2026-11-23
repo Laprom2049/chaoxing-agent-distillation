@@ -1,0 +1,65 @@
+{
+  "checkpoint_id": "CP-C-001",
+  "stage": "B5(验证) -> 部分F",
+  "created_at": "2026-11-15T13:57:13+08:00",
+  "loop30": {
+    "planned": 30,
+    "completed": 11,
+    "failed": [
+      "R7"
+    ],
+    "unexecuted": 18,
+    "completed_ids": [
+      "R1",
+      "R2",
+      "R3",
+      "R4",
+      "R5",
+      "R6",
+      "R8",
+      "R9",
+      "R10",
+      "R11",
+      "R12"
+    ],
+    "avg_skeleton_score": 7.82,
+    "per_check_pass": {
+      "K1_five_sections": "11/11",
+      "K2_four_layers": "10/11",
+      "K3_stage_mark": "11/11",
+      "K4_probe_questions": "11/11",
+      "K5_leave_blank": "10/11",
+      "K6_ai_warning": "11/11",
+      "K7_citation_ok": "11/11",
+      "K8_ability_named": "11/11"
+    }
+  },
+  "blocker": {
+    "code": "SANDBOX_DESKTOP_LOCKED",
+    "detail": "winapp ui click/send-keys/screenshot -> no_interactive_desktop (\"session locked or on a secure desktop\") 或 capture_failed: StretchBlt failed。UIA 读取(search/inspect/get-value)仍正常。",
+    "user_action_required": "在宿主机上点一下 Windows Sandbox 窗口以解除锁屏（该窗口 PID 17196 / WindowsSandboxRemoteSession），然后告知继续。",
+    "do_not_restart_sandbox": "重启会丢失登录态与 R1-R12 全部对话历史"
+  },
+  "salvaged": {
+    "R12_json": "evidence/rounds30/R12.json (9.04 MB, 含 R1-R12 全部 DOM)",
+    "note": "锁屏后仍可用 UIA 读取，故 R11/R12 在无法输入的情况下成功存盘"
+  },
+  "resume": {
+    "start_from": 13,
+    "dump_at": [
+      25,
+      30
+    ],
+    "script": "evidence/run-rounds30e.ps1（已修：每轮重新解析 slug）",
+    "aggregator": "evidence/aggregate30v3.cjs（已修：不可见字符过滤、按运行完成切分、4-gram 归属）"
+  },
+  "deliverables_added": [
+    "LOOP30_WORKFLOW.md",
+    "ARCH_VALIDATION.md",
+    "RECONSTRUCTION_PROMPT.md"
+  ],
+  "contradictions_found": [
+    "L-1「先自主、后 AI 未激活」被推翻：R11 明说不直接给完整推导",
+    "v1 遗漏五段骨架 / 阶段判定 / 导学问题 / AI 局限性声明 / 能力点明"
+  ]
+}
