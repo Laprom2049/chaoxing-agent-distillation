@@ -38,7 +38,9 @@ for (const rel of list) {
   const abs = path.join(ROOT, rel)
   if (!fs.existsSync(abs)) continue
   const buf = fs.readFileSync(abs)
-  files.push({ path: rel, bytes: buf.length, sha256: crypto.createHash('sha256').update(buf).digest('hex') })
+  // 行尾归一化后再哈希：Windows 检出为 CRLF、Linux 为 LF，但内容应等价。
+  const norm = buf.toString('utf8').replace(/\r\n/g, '\n')
+  files.push({ path: rel, bytes: buf.length, sha256: crypto.createHash('sha256').update(norm, 'utf8').digest('hex') })
 }
 files.sort((a, b) => (a.path < b.path ? -1 : 1))
 

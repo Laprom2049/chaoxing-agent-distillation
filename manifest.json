@@ -1,10 +1,10 @@
 {
  "name": "chaoxing-ai-ta-behavior-distillation",
  "version": "1.0.0",
- "generatedAt": "2026-11-23T06:51:57.306Z",
+ "generatedAt": "2026-11-23T06:52:36.891Z",
  "scope": "git 跟踪文件；不含 manifest.json 自身、out/ 与未公开的原始 dump",
  "totalFiles": 91,
- "totalBytes": 1668125,
+ "totalBytes": 1668358,
  "files": [
   {
    "path": ".gitattributes",
@@ -64,12 +64,12 @@
   {
    "path": "docs/EXP60_REPORT.md",
    "bytes": 31343,
-   "sha256": "2be928be8252193f943f9d4de87043371126e1985ca7d3edb437b99d53d76748"
+   "sha256": "327d31ece42b841574b464a6dd65d9056e9f36629881a59f6c371693c821ad43"
   },
   {
    "path": "docs/EXPERIMENT_60.md",
    "bytes": 12102,
-   "sha256": "df0e3275b956dc421476af22f326f36198c44f45687eaa4afddd7fd766037249"
+   "sha256": "4c8a49f15ea7256cb2cd4e34b4a66458ce794c96b394bb2c8bd0585a1c02c298"
   },
   {
    "path": "docs/LOOP30_WORKFLOW.md",
@@ -179,17 +179,17 @@
   {
    "path": "meta/checkpoints/checkpoint-C.json",
    "bytes": 2139,
-   "sha256": "9006a6da4cbdca66b59e0783119ce41df9375934330551a54f8b51e11c8a5d7a"
+   "sha256": "d8fabb5f92eb48464d8df716a8b4c3ea4512bb08d7bbe427a0b7915aab5099fe"
   },
   {
    "path": "meta/checkpoints/checkpoint-D.json",
    "bytes": 1569,
-   "sha256": "b109c0dc2d728ad443bb9abbe3c825f9071384e8dbe516423579814a60388eae"
+   "sha256": "3d98a68b8aced8fc33d058c9621666c270fcf7cda99dc1f99d098d1c324ab619"
   },
   {
    "path": "meta/distillation_manifest.json",
    "bytes": 13102,
-   "sha256": "fe048b01cbe7dd2b176d56feb78172c4ad0d38d934c134ca1ac46724e99cbda6"
+   "sha256": "7ae5a8553594949dbb54eb348941d93c8dd526a974f6f8720787d7891ae42ca9"
   },
   {
    "path": "package.json",
@@ -244,7 +244,7 @@
   {
    "path": "reproduce/archive/run-high-priority.ps1",
    "bytes": 7221,
-   "sha256": "e5aac10d2e4f9d9bf80707ce9e2f861e94c9912783f2fbbce387d9106926e510"
+   "sha256": "a85378c7b831a16570f3cf94a30cc98251dd3e94dd24b64d6f0c45033d311713"
   },
   {
    "path": "reproduce/archive/run-high-watch2.ps1",
@@ -264,12 +264,12 @@
   {
    "path": "reproduce/archive/run-medfill2.ps1",
    "bytes": 4643,
-   "sha256": "1e6176337d9966b43d8867ff172b4629f8951110550b97598e281509c02cd149"
+   "sha256": "52bea8b7ccfe6fbddb7276b30b8315ef1fc4cafd0c296869404dc61d5264e1d0"
   },
   {
    "path": "reproduce/archive/run-medfill3.ps1",
    "bytes": 4668,
-   "sha256": "7536dc0e1092069caef1d0bd66f9ba4aee0f690ab875e972651361c5bf761d7f"
+   "sha256": "a5d0fc07d6ed1d933a41ae4e15c9a29ff189594326d138608ef5876aa0b76b6e"
   },
   {
    "path": "reproduce/archive/run-medfill3b.ps1",
@@ -328,8 +328,8 @@
   },
   {
    "path": "reproduce/gen_manifest.cjs",
-   "bytes": 2275,
-   "sha256": "64f1307d5251cebde0752d065f8aeb75ce14691345a6fb4028764caba3235230"
+   "bytes": 2440,
+   "sha256": "29a71f75da776a1c010df68c729322001b05ee2198a6b7ee145ce1244587ed77"
   },
   {
    "path": "reproduce/lib/env.cjs",
@@ -354,7 +354,7 @@
   {
    "path": "reproduce/runbooks/run-high30v2.ps1",
    "bytes": 9901,
-   "sha256": "03c1bff99b456caa4b09f5ebc686a9cfa01a8b3e44b9c8eaeafa79ecfc42607f"
+   "sha256": "160996ed3a6131af0dd26d1a282b2aafdc6f66a5120aa7a6517921c5444ad38c"
   },
   {
    "path": "reproduce/runbooks/run-medium-retry.ps1",
@@ -368,23 +368,23 @@
   },
   {
    "path": "reproduce/selftest.cjs",
-   "bytes": 8852,
-   "sha256": "2f43732fa709c009f4815de2d3ec57df3cf29ddf3aa6f3dba2cbace03a965d53"
+   "bytes": 8920,
+   "sha256": "ac5faea9a3858644ddaa61afde1eb6eb6b6420630c163c8fa573721a457a5fff"
   },
   {
    "path": "reproduce/tools/aggregate_all.cjs",
    "bytes": 12603,
-   "sha256": "10e4237838320680708887fda8b799977c9196090c0b06c5e7a5bc4963372e01"
+   "sha256": "5efcc6a047b6fa169e865b6530da39fa00980fe58abd7c2d58e26412e462a8b0"
   },
   {
    "path": "reproduce/tools/analyze60.cjs",
    "bytes": 23733,
-   "sha256": "9a3a119f3bfd1058016b3b878f813dba85eeee9f660c5d20184e7b9cadca8c40"
+   "sha256": "7354f966139f4c076d7e448392f9a9c0981b6c2eedaa2d50bf0c2c45375a3aa7"
   },
   {
    "path": "reproduce/tools/analyze_high.cjs",
    "bytes": 7103,
-   "sha256": "7de14f0aedf9207735e18233dcb5b4ea19415c37b84556664d17020fc41777c8"
+   "sha256": "c8fa983d2092a8654f1630304785b6d1c69b9faed33bc52fc12d0644bee2d3f6"
   },
   {
    "path": "reproduce/tools/audit_input_fidelity.cjs",
@@ -394,7 +394,7 @@
   {
    "path": "reproduce/tools/audit_z_fidelity.cjs",
    "bytes": 4274,
-   "sha256": "ef7dcb711a69b8a56983a7e4f4427c351ef64ee81e7e3f55ab1ebebec01e6d52"
+   "sha256": "e5ab71f466aaddf93f0e9259490e1b9e8fa2b96928e60cf7f83a6a41e9988f2d"
   },
   {
    "path": "reproduce/tools/check_inputs.cjs",
@@ -414,7 +414,7 @@
   {
    "path": "reproduce/tools/sensitivity.cjs",
    "bytes": 6631,
-   "sha256": "6701a5d09b2dd9d774d24311694d554da467a7d5f7b1899f7a36f68bba5a9fe7"
+   "sha256": "0f87387307239d172c7d0f1d8fc1273353162031bace9a71cb200c7e9dbd15fb"
   },
   {
    "path": "reproduce/tools/verify_transferable.cjs",
@@ -434,7 +434,7 @@
   {
    "path": "spec/behavior_spec.yaml",
    "bytes": 21417,
-   "sha256": "738f04aa2370776170e73ace70e11a82a5df668525ee17a16a60d614f31bcb4d"
+   "sha256": "abaace14a7867bf26282aa71fda49931e9d7b208beae5b973ef2f6caeda75c9a"
   },
   {
    "path": "spec/site_map.json",

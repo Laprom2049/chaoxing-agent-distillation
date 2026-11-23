@@ -156,7 +156,8 @@ if (!NO_HASH && fs.existsSync(mp)) {
   for (const f of man.files) {
     const abs = path.join(ROOT, f.path)
     if (!fs.existsSync(abs)) { mism.push(`缺失 ${f.path}`); continue }
-    const h = crypto.createHash('sha256').update(fs.readFileSync(abs)).digest('hex')
+    const raw = fs.readFileSync(abs).toString('utf8').replace(/\r\n/g, '\n')
+    const h = crypto.createHash('sha256').update(raw, 'utf8').digest('hex')
     if (h !== f.sha256) mism.push(`改动 ${f.path}`)
   }
   mism.length ? fail('manifest 完整性', mism.slice(0, 3).join(' | ') + (mism.length > 3 ? ` …共 ${mism.length} 处` : ''))
